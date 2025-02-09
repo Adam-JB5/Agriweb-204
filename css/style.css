@@ -1,0 +1,181 @@
+Paleta {
+color :#270722;
+color :#0efa59;
+color :#fa8334;
+color :#a581cd;
+color :#747eff;
+}
+
+Paleta2 {
+    color: #d8a7ca;
+    color: #4c2c72;
+    color: #77867f;
+    color: #82ff9e;
+    color: #c2e812;
+}
+
+Paleta3 {
+    color: #132a13;
+    color: #31572c;
+    color: #462255;
+    color: #90a955;
+    color: #ecf39e;
+}
+
+@font-face {
+    font-family: 'Mairy';
+    src: url(../assets/fonts/Mairy\ Regular.otf);
+}
+
+@font-face {
+    font-family: 'Mairy Bold';
+    src: url(../assets/fonts/Mairy\ Bold.otf);
+}
+
+
+/* ELEMENTOS GLOBALES */
+* {
+    margin: 0;
+}
+
+body {
+    text-align: center;
+    font-family: 'Mairy';
+}
+
+h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+    color: white;
+    font-family: 'Mairy Bold';
+}
+
+h1 {
+    font-size: 5vw;
+    margin-left: 2%;
+}
+
+form {
+    margin-inline: auto;
+}
+
+label {
+    font-size: 3vw;
+    color: white;
+}
+
+input[type=email], input[type=password] {
+    width: 80%;
+    font-size: 2vw;
+    background-color: #000000;
+    color: #ffffff;
+    border: unset;
+}
+
+button {
+    font-family: 'Mairy';
+    color: white;
+}
+
+
+/* CABECERA */
+#header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #132a13;
+    height: 10vh;
+}
+
+#header button {
+    margin-left: 10vw;
+}
+
+#logo {
+    max-height: 90%;
+    width: auto;
+}
+
+
+/* CONTENIDO PRINCIPAL */
+#main {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../assets/images/campo2.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#divForm {
+    background-color: #27272795;
+    width: 50vw;
+    margin-inline: auto;
+    border: 8px black solid;
+    border-radius: 30% 30% 30% 30% / 10% 10% 10% 10% ;
+    overflow: hidden;
+}
+
+
+
+
+/* Botones del form */
+#botonesForm button {
+    height: 7vh;
+    border: unset;
+    background-color: #132a13;   
+}
+
+#botonesForm button:hover {
+    background-color: #31572c;  
+}
+
+#divBotonesLogin {
+    display: flex;
+}
+
+#divBotonesLogin button {
+    flex: 1;
+}
+
+#divBotonesLogin :nth-child(1) {
+    border-right: 5px solid #31183c;
+}
+
+#divBotonesLogin :nth-child(2) {
+}
+
+#divBotonRegistro button {
+    width: 100%;
+}
+
+
+
+
+#footer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #132a13;
+    height: 10vh;
+    color: white;
+}
+
+
+
+@media (max-width: 800px) {
+    #divForm {
+        border-radius: 8px;
+    }
+
+    #divBotonesLogin :nth-child(1) {
+        border-radius: unset;
+    }
+    
+    #divBotonesLogin :nth-child(2) {
+        border-radius: unset;
+    }
+}
