@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Agriweb</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script type="module" src="./js/auth.js"></script>
+    <script src="./js/jquery-1.9.0.js"></script>
     <script src="./js/app.js"></script>
-    <script src="./js/auth.js"></script>
     <script src="./js/tables.js"></script>
     <script src="./js/tensorflow.js"></script>
     <script src="./js/maps.js"></script>
+    <script src="./js/rss.js"></script>
+
 </head>
 <body>
     <div id="header">
@@ -19,36 +23,45 @@
     </div>
 
     <div id="main">
-        <div id="divForm">
+        <div id="pantallaLogin" class="animate__animated animate__shake">
 
-            <form action="">
-                <br>
-                <label for="email">EMAIL</label><br>
-                <input id="email" type="email"><br><br><br><br><br>
+            <div id="divForm">
+                <form id="formularioLogin">
+                    <br>
+                    <label for="email" class="animate__animated animate__shake animate_infinite">EMAIL</label><br>
+                    <input id="email" type="email" autofocus><br><br><br><br><br>
 
-                <label for="contrasenna">CONTRASEÑA</label><br>
-                <input id="contrasenna" type="password"><br><br><br><br><br><br><br><br><br><br>
+                    <label for="contrasenna">CONTRASEÑA</label><br>
+                    <input id="contrasenna" type="password"><br><br>
 
-                <div id="botonesForm">
-                    <div id="divBotonesLogin">
-                        <button id="botonLogin">INICIAR SESIÓN</button>
-                        <button id="botonRecuperacion">¿NO RECUERDAS TU CONTRASEÑA?</button>
+                    <div id="botonesForm">
+                        <div id="divBotonesLogin">
+                            <button id="botonLogin" type="submit">INICIAR SESIÓN</button>
+                            <button id="botonRecuperacion">¿NO RECUERDAS TU CONTRASEÑA?</button>
+                        </div>
+
+                        <div id="divBotonRegistro">
+                            <button id="botonRegistro" style="border-top: 5px solid #31183c;">REGISTRARSE</button>
+                        </div>
                     </div>
+                </form>
+            </div>
 
-                    <div id="divBotonRegistro">
-                        <button id="botonRegistro" style="border-top: 5px solid #31183c;">REGISTRARSE</button>
-                    </div>
-                </div>
-            </form>
+        </div>
 
+
+        
+
+        <div id="pantallaMenu" style="display: none;">
+            <h1>MENU</h1>
         </div>
     </div>
 
-    <div id="footer">
+    <!-- <div id="footer">
         <p>AgriWare</p>
         <p>Adam Janah</p>
         <p>Castro-Urdiales</p>
-    </div>
+    </div> -->
 
 </body>
 </html>
