@@ -23,9 +23,6 @@ const firebaseConfig = {
     measurementId: "G-QCKJCBC71B"
 };
 
-
-document.addEventListener('DOMContentLoaded', inicio);
-
 //Codigos de error
 const errorMessages = {
     'auth/claims-too-large': 'La carga útil de claims proporcionada a setCustomUserClaims() excede el tamaño máximo permitido de 1000 bytes.',
@@ -86,103 +83,86 @@ const errorMessages = {
     'auth/user-not-found': 'No existe un usuario con el identificador proporcionado.'
 };
 
-let pantallaLogin = document.getElementById("pantallaLogin");
-let pantallaMenu = document.getElementById("pantallaMenu");
-
-function inicio() {
-
-    
-    
-
-    inicializarFirebase();
-    recogerDOM();
-
-}
 
 // Inicializar Firebase
-function inicializarFirebase() {
+export function inicializarFirebase() {
     const app = initializeApp(firebaseConfig);
     window.auth = getAuth(app);
 }
 
-function recogerDOM() {
+// Se recogen los elementos del DOM y se les annade un eventListener
+export function recogerDOM() {
     let formularioLogin = document.getElementById("formularioLogin");
     let botonLogin = document.getElementById("botonLogin");
     let botonRecuperacion = document.getElementById("botonRecuperacion");
     let botonRegistro = document.getElementById("botonRegistro");
 
 
-    formularioLogin.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const inputEmail = document.getElementById("email");
-        const inputContrasenna = document.getElementById("contrasenna");
+    /* Se devuelve una promesa para que al invocar la funcion se pueda hacer alguna accion de forma asincrona usando await */
+    return new Promise((resolve) => {
+        formularioLogin.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const inputEmail = document.getElementById("email");
+            const inputContrasenna = document.getElementById("contrasenna");
 
-        if (!inputEmail.value || !inputContrasenna.value) {
-            console.error("No se han rellenado los dos campos de login");
-            alert("Por favor rellene los dos campos de texto");
-        } else {
-            try {
-                const userCredential = await signInWithEmailAndPassword(auth, inputEmail.value, inputContrasenna.value);
-                alert("Datos correctos");
-                pantallaLogin.classList.add("animate__animated", "animate__fadeOutLeftBig");
+            if (!inputEmail.value || !inputContrasenna.value) {
+                console.error("No se han rellenado los dos campos de login");
+                alert("Por favor rellene los dos campos de texto");
+            } else {
+                try {
+                    const userCredential = await signInWithEmailAndPassword(auth, inputEmail.value, inputContrasenna.value);
+                    alert("Datos correctos");
+                    resolve(true);
+                } catch (error) {
+                    alert(`Datos incorrectos, vuelva a intentarlo.\n 
+                        ERROR: ` + (errorMessages[error.code] === undefined ? `${error}` : `${errorMessages[error.code]}`));
 
-                pantallaLogin.addEventListener("animationend", () => {
-                    pantallaLogin.style.display = "none";
-                    pantallaMenu.style.display = "block";
-                });
-
+                    inputContrasenna.value = "";
+                    resolve(false);
+                }   
                 
-                pantallaMenu.classList.add("animate__animated", "animate__fadeInRightBig");
-                /* pantallaLogin.style.display = "none";
-                pantallaMenu.style.display = "block"; */
-            } catch (error) {
-                alert(`Datos incorrectos, vuelva a intentarlo.\n 
-                    ERROR: ` + (errorMessages[error.code] === undefined ? `${error}` : `${errorMessages[error.code]}`));
+            }
+        });
+    
 
-                inputContrasenna.value = "";
-                console.log(inputContrasenna);
-            }   
+        botonRecuperacion.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const inputEmail = document.getElementById("email").value;
             
-        }
-    });
+            if (!inputEmail) {
+                console.error("No se han rellenado el campo email");
+                alert("Por favor rellene el campo email");
+            } else {
+                try {
+                    const userCredential = await sendPasswordResetEmail(auth, inputEmail);
+                    alert("Se ha enviado un correo de recuperación al email proporcionado. Por favor siga las indicaciones del correo enviado");
+                } catch (error) {
+                    alert(`Datos incorrectos, vuelva a intentarlo.\n 
+                        ERROR: ` + (errorMessages[error.code] === undefined ? `${error}` : `${errorMessages[error.code]}`));
+                }   
+            }
+        });
 
-    botonRecuperacion.addEventListener("click", async (e) => {
-        e.preventDefault();
-        const inputEmail = document.getElementById("email").value;
-        
-        if (!inputEmail) {
-            console.error("No se han rellenado el campo email");
-            alert("Por favor rellene el campo email");
-        } else {
-            try {
-                const userCredential = await sendPasswordResetEmail(auth, inputEmail);
-                alert("Se ha enviado un correo de recuperación al email proporcionado. Por favor siga las indicaciones del correo enviado");
-            } catch (error) {
-                alert(`Datos incorrectos, vuelva a intentarlo.\n 
-                    ERROR: ` + (errorMessages[error.code] === undefined ? `${error}` : `${errorMessages[error.code]}`));
-            }   
-        }
-    });
+        botonRegistro.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const inputEmail = document.getElementById("email").value;
+            const inputContrasenna = document.getElementById("contrasenna").value;
 
-    botonRegistro.addEventListener("click", async (e) => {
-        e.preventDefault();
-        const inputEmail = document.getElementById("email").value;
-        const inputContrasenna = document.getElementById("contrasenna").value;
+            if (!inputEmail || !inputContrasenna) {
+                console.error("No se han rellenado los dos campos de login");
+                alert("Por favor rellene los dos campos de texto");
+            } else {
+                try {
+                    const userCredential = await createUserWithEmailAndPassword(auth, inputEmail, inputContrasenna);
+                    alert("Se ha registrado correctamente su usuario");
 
-        if (!inputEmail || !inputContrasenna) {
-            console.error("No se han rellenado los dos campos de login");
-            alert("Por favor rellene los dos campos de texto");
-        } else {
-            try {
-                const userCredential = await createUserWithEmailAndPassword(auth, inputEmail, inputContrasenna);
-                alert("Se ha registrado correctamente su usuario");
-
+                    
+                } catch (error) {
+                    alert(`Datos incorrectos, vuelva a intentarlo.\n 
+                        ERROR: ` + (errorMessages[error.code] === undefined ? `${error}` : `${errorMessages[error.code]}`));
+                    }
                 
-            } catch (error) {
-                alert(`Datos incorrectos, vuelva a intentarlo.\n 
-                    ERROR: ` + (errorMessages[error.code] === undefined ? `${error}` : `${errorMessages[error.code]}`));
-                }
-            
-        }
+            }
+        });
     });
 }
