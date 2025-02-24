@@ -118,7 +118,7 @@ export function recogerDOM() {
                         ERROR: ` + (errorMessages[error.code] === undefined ? `${error}` : `${errorMessages[error.code]}`));
 
                     inputContrasenna.value = "";
-                    resolve(false);
+                    
                 }   
                 
             }

@@ -13,12 +13,12 @@
     <!-- Mapa / Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script type="module" src="./js/maps.js"></script>
 
     <script src="./js/jquery-1.9.0.js"></script>
     <script type="module" src="./js/app.js"></script>
     <script src="./js/tables.js"></script>
     <script src="./js/tensorflow.js"></script>
-    <script src="./js/maps.js"></script>
     <!-- Noticias y avisos RSS -->
     <script type="module" src="./js/rss.js"></script>
 
@@ -64,40 +64,46 @@
             <div id="seccionLateral">
                 <h2 id="h2Menu">MENU</h2>
                 <div id="enlacesMenuLateral">
-                    <a href="#">Sección 1</a>
-                    <a href="#">Sección 2</a>
-                    <a href="#">Sección 3</a>
-                    <a href="#">Sección 4</a>
-                    <a href="#">Sección 5</a> 
+                    <a href="#" class="enlacesSeccion">AVISOS Y NOTICIAS</a>
+                    <a href="#" class="enlacesSeccion">UBICACIÓN ACTUAL</a>
+                    <a href="#" class="enlacesSeccion">INFORMACIÓN DEL CLIMA</a>
+                    <a href="#" class="enlacesSeccion">Sección 4</a>
+                    <a href="#" class="enlacesSeccion">Sección 5</a> 
                 </div>
                 
             </div>
 
-            <div id="seccionesMenu" style="width: 85vw; height: 100%; float: right;">
-                <div id="seccion1" style="background-color: red; width: 100%; height: 100%;">
+            <div id="seccionesMenu">
+                <div id="seccion1" class="seccionDeMenu">
+                    
+                    <h2>AVISOS</h2>
                     <div id="avisos">
-
+                        
                     </div>
 
+                    <br>
+
+                    <h2>NOTICIAS</h2>
                     <div id="noticias">
-
+                        
                     </div>
-                    <!-- <div id="map" style="width: 90%; height: 80%;"></div> -->
+                    <!-- <div id="map" style="width: 90%; height: 80vh;"></div> -->
                 </div>
 
-                <div id="seccion2">
-
+                <div id="seccion2" class="seccionDeMenu">
+                    <h2>UBICACIÓN ACTUAL</h2>
+                    <div id="map"></div>
                 </div>
 
-                <div id="seccion3">
-
-                </div>
-
-                <div id="seccion4">
+                <div id="seccion3" class="seccionDeMenu">
 
                 </div>
 
-                <div id="seccion5">
+                <div id="seccion4" class="seccionDeMenu">
+
+                </div>
+
+                <div id="seccion5" class="seccionDeMenu">
 
                 </div>
             </div>
