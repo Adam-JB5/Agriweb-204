@@ -52,6 +52,7 @@ async function obtenerDatosMeteorologicos(latitud, longitud) {
             temperaturaMaxima: datos.daily.temperature_2m_max[0],
             temperaturaMinima: datos.daily.temperature_2m_min[0],
         };
+        return datos;
 
     } catch (error) {
         console.error("Error al obtener los datos meteorológicos:", error);
@@ -80,7 +81,7 @@ export async function getWeather() {
         const datosClima = await obtenerDatosMeteorologicos(coordinates.latitude, coordinates.longitude);
         if (!datosClima) throw new Error("Error al obtener la información del clima.");
 
-        // Se recogen algunos datos para mostrarlo
+        /* // Se recogen algunos datos para mostrarlo
         const infoMeteo = `
             Ciudad: ${coordinates.name || "Ubicación actual"}, ${coordinates.country || ""}
             Temperatura Actual: ${datosClima.temperaturaActual}°C
@@ -90,10 +91,12 @@ export async function getWeather() {
             Temperatura Mínima: ${datosClima.temperaturaMinima}°C
         `;
 
-        document.getElementById("resultado-clima").textContent = infoMeteo;
+        document.getElementById("resultado-clima").textContent = infoMeteo; */
+
+        return datosClima;
 
     } catch (error) {
-        document.getElementById("resultado-clima").textContent = error.message;
+        alert("Ha habido un error. Es posible que no haya dado permisos de ubicación:" + error.message);
     }
 }
 

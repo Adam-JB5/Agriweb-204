@@ -106,7 +106,7 @@
 
 #map {
     width: 70%;
-    height: 90vh;
+    height: 90%;
     margin-inline: auto;
 }
 
@@ -114,6 +114,56 @@
 
 #seccion3 {
     display: none;
+    color: white !important;
+}
+
+#seccion3 button {
+    background-color: rgb(194, 194, 194);
+}
+
+#consultaTiempo {
+    background-color: #31572c;
+    border: #8d53d4 5px solid;
+    border-radius: 10px;
+    width: 80%;
+    margin-inline: auto;
+}
+
+h4 {
+    color: rgb(134, 134, 134);
+    font-size: small;
+}
+
+#divFormCiudad {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+input[type=text] {
+    font-size: 3vw;
+}
+
+#botonMeteo {
+    width: 20%;
+    background-color: #29d94f;
+    border-radius: 10px;
+}
+
+#botonMeteo:hover {
+    background-color: #25c047;
+    color: rgb(216, 216, 216);
+}
+
+#tablaMeteo {
+    margin-inline: auto;
+    width: 90%;
+    height: 100%;
+}
+
+th, td {
+    font-size: 2vw;
+    text-align: center !important;
+    margin-inline: auto;
 }
 
 /* SECCION 4 */
@@ -143,7 +193,7 @@
 
     h2 {
         font-size: 12vw;
-        padding-top: 5px;
+        padding-top: 8px;
     }
 
 
@@ -161,7 +211,7 @@
         font-size: 3vw;
         padding: unset;
         margin-bottom: unset;
-        
+        font-size: 3vw;
     }
 
     #enlacesMenuLateral {
@@ -202,5 +252,11 @@
 
     #map {
         width: 95%;
+    }
+
+    /* SECCION 3 */
+
+    th, td {
+        font-size: 2.5vw;
     }
 }

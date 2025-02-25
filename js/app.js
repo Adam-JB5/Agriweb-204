@@ -4,6 +4,7 @@ import * as auth from "./auth.js";
 import * as rss from "./rss.js";
 import * as maps from "./maps.js";
 import * as meteo from "./meteo.js";
+import * as tables from "./tables.js";
 
 document.addEventListener('DOMContentLoaded', inicio);
 
@@ -11,6 +12,7 @@ async function inicio() {
     autenticacion();
     avisosYNoticias();
     eventoCambioDeSeccion();
+    infoMeteorologica();
 
     async function autenticacion() {
         auth.inicializarFirebase();
@@ -71,12 +73,21 @@ async function inicio() {
                 let seccionMostrar = document.getElementById(`seccion${index + 1}`);
                 if (seccionMostrar) {
                     seccionMostrar.style.display = "block";
-                    recogerMapa()
-                    .then(() => {
-                        setTimeout(() => {
-                            maps.map.invalidateSize();
-                        }, 100);
-                    });
+
+                    if (seccionMostrar.id == "seccion2") {
+                        recogerMapa()
+                        .then(() => {
+                            setTimeout(() => {
+                                maps.map.invalidateSize();
+                            }, 100);
+                        });
+                    }
+
+                    if (seccionMostrar.id != "seccion1") {
+                        document.getElementById("main").style.height = "90vh";
+                    } else {
+                        document.getElementById("main").style.height = "unset";
+                    }   
                 }
             })
         });
@@ -90,6 +101,22 @@ async function inicio() {
                 maps.map.invalidateSize();
             }, 100);
         });
+    }
+
+    async function infoMeteorologica() {
+        let botonMeteo = document.getElementById("botonMeteo");
+        
+        
+        botonMeteo.addEventListener("click", async () => {
+            let datosClima = await meteo.getWeather();
+            console.log(datosClima);
+
+            tables.renderTable(datosClima);
+        });
+    }
+
+    async function reconocimientoVegetal() {
+
     }
 
     
