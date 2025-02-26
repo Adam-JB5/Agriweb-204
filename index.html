@@ -7,54 +7,71 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/menu.css">
     <link rel="stylesheet" href="./css/responsive.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
+    <!-- JQuery -->
+    <script src="./js/jquery-1.9.0.js"></script>
+
     <!-- Autenticación Firebase -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script type="module" src="./js/auth.js"></script>
+
     <!-- Mapa / Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script type="module" src="./js/maps.js"></script>
+
     <!-- Info. Meteorologica -->
     <script type="module" src="./js/meteo.js"></script>
+
     <!-- Modelo Tensorflow -->
     <script type="module" src="./js/tensorflow.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 
-    <script src="./js/jquery-1.9.0.js"></script>
-    <script type="module" src="./js/app.js"></script>
+    <!-- DataTables -->
     <script type="module" src="./js/tables.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
-    
+
     <!-- Noticias y avisos RSS -->
     <script type="module" src="./js/rss.js"></script>
 
+    <!-- Script principal -->
+    <script type="module" src="./js/app.js"></script>
+
 </head>
 <body>
+    <!-- Cabecera de la pagina -->
     <div id="header">
         <img id="logo" src="./assets/images/logo.png" alt="Logo">
         <h1>AGRIWARE</h1>
     </div>
 
+    <!-- Contenido principal -->
     <div id="main">
 
-        <div id="pantallaLogin" class="animate__animated animate__shake">
+        <!-- Pantalla de login -->
+        <div id="pantallaLogin">
 
+            <!-- Div del formulario -->
             <div id="divForm">
                 <form id="formularioLogin">
                     <br>
+                    <!-- Email -->
                     <label for="email" class="animate__animated animate__shake animate_infinite">EMAIL</label><br>
                     <input id="email" type="email" autofocus><br><br><br><br><br>
 
+                    <!-- Contrasenna -->
                     <label for="contrasenna">CONTRASEÑA</label><br>
                     <input id="contrasenna" type="password"><br><br>
 
+                    <!-- Botones -->
                     <div id="botonesForm">
+                        <!-- Botones inicio de sesion y recuperacion de contrasenna -->
                         <div id="divBotonesLogin">
                             <button id="botonLogin" type="submit">INICIAR SESIÓN</button>
                             <button id="botonRecuperacion">¿NO RECUERDAS TU CONTRASEÑA?</button>
                         </div>
 
+                        <!-- Boton de registro -->
                         <div id="divBotonRegistro">
                             <button id="botonRegistro" style="border-top: 5px solid #31183c;">REGISTRARSE</button>
                         </div>
@@ -64,10 +81,9 @@
 
         </div>
 
-
-        
-
+        <!-- Pantalla de menu principal -->
         <div id="pantallaMenu" style="display: none;">
+            <!-- Seccion lateral con los enlaces a las distintas secciones -->
             <div id="seccionLateral">
                 <h2 id="h2Menu">MENU</h2>
                 <div id="enlacesMenuLateral">
@@ -79,9 +95,12 @@
                 
             </div>
 
+            <!-- Div en el que se mostraran los distintos menus -->
             <div id="seccionesMenu">
+                <!-- Seccion 1: Noticias y avisos -->
                 <div id="seccion1" class="seccionDeMenu">
                     
+                    <!-- Avisos -->
                     <h2>AVISOS</h2>
                     <div id="avisos">
                         
@@ -89,17 +108,20 @@
 
                     <br>
 
+                    <!-- Noticias -->
                     <h2>NOTICIAS</h2>
                     <div id="noticias">
                         
                     </div>
                 </div>
 
+                <!-- Seccion 2: Mapa -->
                 <div id="seccion2" class="seccionDeMenu">
                     <h2>UBICACIÓN 📍 ACTUAL</h2>
                     <div id="map"></div>
                 </div>
 
+                <!-- Seccion 3: Consulta del tiempo en ciudades/ubicacion actual -->
                 <div id="seccion3" class="seccionDeMenu">
                     <h2>INFORMACIÓN DEL TIEMPO</h2>
 
@@ -108,6 +130,7 @@
                         <h3>INTRODUZCA UNA CIUDAD PARA CONSULTAR EL TIEMPO</h3>
                         <h4>(NO INTRODUZCA NADA PARA CONSULTAR LA INFORMACIÓN DE SU UBICACIÓN ACTUAL)</h4>
                         <br>
+                        <!-- Input de tipo texto y un boton -->
                         <div id="divFormCiudad">
                             <input type="text" id="ciudad" placeholder="Santander, Sevilla, etc.">
                             <input type="submit" value="📍ENVIAR" id="botonMeteo">
@@ -118,6 +141,7 @@
                     <br>
                     <br>
 
+                    <!-- Tabla con thead y tbody predefinidos para que DataTables haga uso de ella -->
                     <div>
                         <table id="tablaMeteo">
                             <thead>
@@ -137,6 +161,7 @@
                     </div>
                 </div>
 
+                <!-- Seccion 4: Reconocimiento de vegetales -->
                 <div id="seccion4" class="seccionDeMenu">
                     <h2>RECONOCIMIENTO DE VERDURAS</h2>
 
@@ -165,6 +190,7 @@
                         <input type="file" id="inputImagen" accept="image/*">
                     </div>
 
+                    <!-- Div con el resultado de la prediccion -->
                     <div id="divResultado">
                         <h3>RESULTADO</h3>
                         <br>

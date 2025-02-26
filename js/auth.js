@@ -1,5 +1,5 @@
 "use strict";
-// Import the functions you need from the SDKs you need
+// Importacion de funciones de Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
 import { 
     getAuth, 
@@ -9,10 +9,9 @@ import {
     signOut 
 } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-auth.js";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Configuracion de la aplicacion web
+
+// Configuracion de la aplicacion web de Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyB57_EmWzgzJ6A-hCip1US3IPxR6jJiSYs",
     authDomain: "agriweb-daw204.firebaseapp.com",
@@ -23,7 +22,7 @@ const firebaseConfig = {
     measurementId: "G-QCKJCBC71B"
 };
 
-//Codigos de error
+//Codigos de error (Mapa)
 const errorMessages = {
     'auth/claims-too-large': 'La carga útil de claims proporcionada a setCustomUserClaims() excede el tamaño máximo permitido de 1000 bytes.',
     'auth/email-already-exists': 'El correo electrónico proporcionado ya está en uso por otro usuario. Cada usuario debe tener un correo único.',
@@ -92,31 +91,39 @@ export function inicializarFirebase() {
 
 // Se recogen los elementos del DOM y se les annade un eventListener
 export function recogerDOM() {
+
+    /* Recogo el formulario y los botones */
     let formularioLogin = document.getElementById("formularioLogin");
-    let botonLogin = document.getElementById("botonLogin");
     let botonRecuperacion = document.getElementById("botonRecuperacion");
     let botonRegistro = document.getElementById("botonRegistro");
 
 
-    /* Se devuelve una promesa para que al invocar la funcion se pueda hacer alguna accion de forma asincrona usando await */
+    /* Se devuelve una promesa. Esta promesa tan solo resuelve true a la hora de iniciar sesion de forma exitosa, esto se hace para esperar (await) al inicio de sesion para hacer la transicion al menu principal del programa. Esto se hace en la funcion autenticacion() de app.js */
     return new Promise((resolve) => {
+        /* Event listener del formulario */
         formularioLogin.addEventListener("submit", async (e) => {
+
+            /* Evito que se envie el formulario y recogo los campos email y contrasenna */
             e.preventDefault();
             const inputEmail = document.getElementById("email");
             const inputContrasenna = document.getElementById("contrasenna");
 
+            /* Valido que no esten vacios */
             if (!inputEmail.value || !inputContrasenna.value) {
                 console.error("No se han rellenado los dos campos de login");
                 alert("Por favor rellene los dos campos de texto");
             } else {
                 try {
+                    /* Inicio sesion con el metodo de firebase introduciendo como argumento la autenticacion de firebase, el email y la contrasenna */
                     const userCredential = await signInWithEmailAndPassword(auth, inputEmail.value, inputContrasenna.value);
                     alert("Datos correctos");
                     resolve(true);
                 } catch (error) {
+                    /* Muestro un alert con el error. En caso de que el error no se encuentre en el mapa se muestra el texto del propio error, si se encuentra se muestra el valor de la clave asociada con el codigo de error */
                     alert(`Datos incorrectos, vuelva a intentarlo.\n 
                         ERROR: ` + (errorMessages[error.code] === undefined ? `${error}` : `${errorMessages[error.code]}`));
 
+                    /* Vacio el campo de contrasenna */
                     inputContrasenna.value = "";
                     
                 }   
@@ -124,7 +131,7 @@ export function recogerDOM() {
             }
         });
     
-
+        /* Event listener del boton de recuperacion de contrasenna */
         botonRecuperacion.addEventListener("click", async (e) => {
             e.preventDefault();
             const inputEmail = document.getElementById("email").value;
@@ -134,6 +141,7 @@ export function recogerDOM() {
                 alert("Por favor rellene el campo email");
             } else {
                 try {
+                    /* Mando un correo de recuperacion al email */
                     const userCredential = await sendPasswordResetEmail(auth, inputEmail);
                     alert("Se ha enviado un correo de recuperación al email proporcionado. Por favor siga las indicaciones del correo enviado");
                 } catch (error) {
@@ -143,6 +151,7 @@ export function recogerDOM() {
             }
         });
 
+        /* Event listener del boton de registro */
         botonRegistro.addEventListener("click", async (e) => {
             e.preventDefault();
             const inputEmail = document.getElementById("email").value;
@@ -153,11 +162,13 @@ export function recogerDOM() {
                 alert("Por favor rellene los dos campos de texto");
             } else {
                 try {
+                    /* Intenta crear un usuario */
                     const userCredential = await createUserWithEmailAndPassword(auth, inputEmail, inputContrasenna);
                     alert("Se ha registrado correctamente su usuario");
 
                     
                 } catch (error) {
+                    /* Muestra un error */
                     alert(`Datos incorrectos, vuelva a intentarlo.\n 
                         ERROR: ` + (errorMessages[error.code] === undefined ? `${error}` : `${errorMessages[error.code]}`));
                     }

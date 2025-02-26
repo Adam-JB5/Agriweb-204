@@ -96,10 +96,6 @@ button {
     transition: background-color 1s;
 }
 
-#header button {
-    margin-left: 10vw;
-}
-
 #logo {
     max-height: 90%;
     width: auto;
@@ -133,11 +129,7 @@ button {
     margin-bottom: 10vh;
 }
 
-
-
-
 /* Botones del form */
-
 
 #botonesForm button {
     height: 7vh;
@@ -184,12 +176,7 @@ button {
 }
 
 
-/* CONTENIDO PRINCIPAL MENU */
-
-
-
-
-
+/* Si el dispositivo tiene un ancho de 800px o menos */
 @media (max-width: 800px) {
 
     label {
@@ -205,7 +192,6 @@ button {
     }
 
     #divForm {
-        /* border-radius: 8px; */
         width: 70vw;
     }
 
