@@ -28,6 +28,8 @@ AgriWeb es una plataforma interactiva diseñada para ayudar a los agricultores e
 ├── assets/             # Archivos adicionales como fuentes, imágenes, etc.
 │   ├── fonts/          # Fuentes de texto
 │   ├── images/         # Imágenes (Logo, fondo, etc.)
+├── docs/               # Documentación del proyecto
+│   ├── DiagramaDeFlujo.pdf          # Diagrama de flujo del programa
 ```
 
 ## Funcionalidades
