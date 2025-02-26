@@ -5,6 +5,7 @@ import * as rss from "./rss.js";
 import * as maps from "./maps.js";
 import * as meteo from "./meteo.js";
 import * as tables from "./tables.js";
+import * as tensorflow from "./tensorflow.js";
 
 document.addEventListener('DOMContentLoaded', inicio);
 
@@ -62,7 +63,7 @@ async function inicio() {
         let secciones = document.querySelectorAll(".seccionDeMenu");
 
         enlaces.forEach((element, index) => {
-            element.addEventListener("click", (ev) => {
+            element.addEventListener("click", async (ev) => {
                 ev.preventDefault();
 
                 secciones.forEach(seccion => {
@@ -74,8 +75,20 @@ async function inicio() {
                 if (seccionMostrar) {
                     seccionMostrar.style.display = "block";
 
+
+                    if (seccionMostrar.id != "seccion1" && seccionMostrar.id != "seccion4") {
+                        document.getElementById("main").style.height = "90vh";
+                    } else {
+                        if (window.innerWidth <= 800) {
+                            document.getElementById("main").style.height = "90vh";
+                        } else {
+                            document.getElementById("main").style.height = "unset";
+                        }
+                    }  
+
+                    /* Si se hace click en la seccion2  */
                     if (seccionMostrar.id == "seccion2") {
-                        recogerMapa()
+                        maps.recogerMapa()
                         .then(() => {
                             setTimeout(() => {
                                 maps.map.invalidateSize();
@@ -83,25 +96,24 @@ async function inicio() {
                         });
                     }
 
-                    if (seccionMostrar.id != "seccion1") {
-                        document.getElementById("main").style.height = "90vh";
-                    } else {
-                        document.getElementById("main").style.height = "unset";
-                    }   
+                    if (seccionMostrar.id == "seccion4") {
+                        await reconocimientoVegetal();
+                    }
+                     
                 }
             })
         });
         
     }
 
-    async function recogerMapa() {
+    /* async function recogerMapa() {
         await maps.recogerMapa()
         .then(() => {
             setTimeout(() => {
                 maps.map.invalidateSize();
             }, 100);
         });
-    }
+    } */
 
     async function infoMeteorologica() {
         let botonMeteo = document.getElementById("botonMeteo");
@@ -117,6 +129,38 @@ async function inicio() {
 
     async function reconocimientoVegetal() {
 
+        const video = document.getElementById('video');
+        const imagenSubida = document.getElementById('imagenSubida');
+        const botonCapturar = document.getElementById('capturar');
+        const botonCambiarCamara = document.getElementById('cambiarCamara');
+        const inputImagen = document.getElementById('inputImagen');
+        const resultado = document.getElementById("resultado");
+        const canvas = document.createElement('canvas');
+
+        inputImagen.addEventListener('change', (event) => {
+            const archivo = event.target.files[0];
+            if (archivo) {
+                const img = new Image();
+                img.src = URL.createObjectURL(archivo);
+                img.onload = async () => {
+                    video.style.display = "none";  // Ocultar video
+                    imagenSubida.src = img.src;
+                    imagenSubida.style.display = "block";  // Mostrar imagen subida
+                    await tensorflow.predecir(img, resultado);
+                };
+            }
+        });
+
+        botonCapturar.addEventListener('click', async () => {
+            tensorflow.capturarFotograma(canvas, video, resultado);
+            console.log("click");
+        });
+        botonCambiarCamara.addEventListener('click', async () => {
+            await tensorflow.accederCamara(video, imagenSubida);
+            console.log("click3");
+        });
+
+        tensorflow.accederCamara;
     }
 
     

@@ -19,6 +19,7 @@
     <script type="module" src="./js/meteo.js"></script>
     <!-- Modelo Tensorflow -->
     <script type="module" src="./js/tensorflow.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 
     <script src="./js/jquery-1.9.0.js"></script>
     <script type="module" src="./js/app.js"></script>
@@ -138,22 +139,37 @@
 
                 <div id="seccion4" class="seccionDeMenu">
                     <h2>RECONOCIMIENTO DE VERDURAS</h2>
-                    <h1>Reconocimiento de Verduras</h1>
 
                     <!-- Video para cámara -->
                     <video id="video" autoplay playsinline></video>
                     
                     <!-- Imagen cuando se sube un archivo -->
-                    <img id="imagen-subida" style="display: none;">
+                    <img id="imagenSubida" style="display: none;">
+
+                    <br>
 
                     <!-- Botones -->
-                    <button id="capturar">📸 Capturar Imagen</button>
-                    <button id="cambiar-camara">🔄 Cambiar Cámara</button>
+                    <div id="divControlCamara">
+                        <h3>CÁMARA</h3>
+                        <br>
+                        <div id="divBotonesCamara">
+                            <button id="capturar">📸 Capturar Imagen</button>
+                            <button id="cambiarCamara">🔄 Activar/Cambiar Cámara</button>
+                        </div>
+                    </div>
 
                     <!-- Input para subir archivo -->
-                    <input type="file" id="input-imagen" accept="image/*">
+                    <div id="divInputImagen">
+                        <h3>INTRODUCIR IMAGEN</h3>
+                        <br>
+                        <input type="file" id="inputImagen" accept="image/*">
+                    </div>
 
-                    <p id="resultado">Esperando captura...</p>
+                    <div id="divResultado">
+                        <h3>RESULTADO</h3>
+                        <br>
+                        <p id="resultado">Esperando captura...</p>
+                    </div>
                 </div>
 
             </div>
